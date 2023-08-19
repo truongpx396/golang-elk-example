@@ -8,26 +8,29 @@ services:
       - ./logs/:/logs/
     ports:
       - 8080:8080
+    networks: ['elk-network']
 
   node02:
-    image: docker.elastic.co/elasticsearch/elasticsearch:7.11.1
+    image: docker.elastic.co/elasticsearch/elasticsearch:7.13.0
     volumes:
       - ./resources/elasticsearch.yml:/usr/share/elasticsearch/config/elasticsearch.yml:ro
     healthcheck:
-      test: ['CMD', 'curl', '-s', '-f', 'http://localhost:9300/_cat/health']
+      test: ['CMD', 'curl', '-s', '-f', 'http://localhost:9200/_cat/health']
       interval: 3s
       timeout: 3s
       retries: 10
     ports:
-      - 9300:9200
+      - 9200:9200
+    networks: ['elk-network']
 
   logstash:
-    image: docker.elastic.co/logstash/logstash:7.11.2
+    image: docker.elastic.co/logstash/logstash:7.13.0-arm64
     volumes:
       - ./resources/logstash.conf:/usr/share/logstash/pipeline/logstash.conf:ro
     depends_on:
       node02:
         condition: service_healthy
+    networks: ['elk-network']
 
   filebeat:
     image: docker.elastic.co/beats/auditbeat-oss:8.2.1-arm64
@@ -41,6 +44,7 @@ services:
     volumes:
       - ./resources/filebeat.yml:/usr/share/filebeat/filebeat.yml
       - ./logs/:/logs/
+    networks: ['elk-network']
 
   kibana:
     image: docker.elastic.co/kibana/kibana:7.13.0
@@ -48,7 +52,8 @@ services:
       node02:
         condition: service_healthy
     environment:
-      ELASTICSEARCH_HOSTS: http://node02:9300
+      ELASTICSEARCH_HOSTS: http://node02:9200
+      elasticsearch.ssl.verificationMode: 'none'
     healthcheck:
       test: ['CMD', 'curl', '-s', '-f', 'http://localhost:5701/api/status']
       interval: 3s
@@ -56,3 +61,8 @@ services:
       retries: 50
     ports:
       - 5701:5601
+    networks: ['elk-network']
+
+networks:
+  elk-network:
+    name: elk-network
