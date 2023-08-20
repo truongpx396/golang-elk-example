@@ -12,6 +12,7 @@ services:
 
   node02:
     image: docker.elastic.co/elasticsearch/elasticsearch:7.13.0
+    container_name: node02
     volumes:
       - ./resources/elasticsearch.yml:/usr/share/elasticsearch/config/elasticsearch.yml:ro
     healthcheck:
