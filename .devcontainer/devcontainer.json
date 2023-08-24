@@ -6,6 +6,15 @@
             "VARIANT": "ubuntu-22.04"
         }
     },
+    "remoteEnv": {
+        "SYNC_LOCALHOST_KUBECONFIG": "true"
+    },
+    "mounts": [
+        "source=/var/run/docker.sock,target=/var/run/docker-host.sock,type=bind",
+        "source=${env:HOME}${env:USERPROFILE}/.kube,target=/usr/local/share/kube-localhost,type=bind"
+        // Uncomment the next line to also sync certs in your .minikube folder
+        // "source=${env:HOME}${env:USERPROFILE}/.minikube,target=/usr/local/share/minikube-localhost,type=bind"
+    ],
     "runArgs": [
         // Uncomment the next line to use a non-root user. On Linux, this will prevent
         // new files getting created as root, but you may need to update the USER_UID
@@ -91,11 +100,12 @@
                 ],
                 "go.coverMode": "atomic", // atomic is required when utilizing -race
                 "go.delveConfig": {
-                    "dlvLoadConfig": {
-                        // increase max length of strings displayed in debugger
-                        "maxStringLen": 2048
-                    },
-                    "apiVersion": 2
+                    // "dlvLoadConfig": {
+                    //     // increase max length of strings displayed in debugger
+                    //     "maxStringLen": 2048
+                    // },
+                    // "apiVersion": 2
+                    "debugAdapter": "legacy"
                 },
                 "terminal.integrated.profiles.linux": {
                     "zsh": {

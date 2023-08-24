@@ -27,3 +27,26 @@ RUN BIN="/usr/local/bin" \
     && curl -L "https://github.com/golang-migrate/migrate/releases/download/v4.15.2/migrate.linux-amd64.tar.gz" | tar xvz \
     && mv migrate "${BIN}/migrate" \
     && chmod +x "${BIN}/migrate"
+
+RUN cd ~ \
+    && mkdir Downloads
+
+# Install istioctl latest release
+RUN cd ~/Downloads \
+    && curl -L https://istio.io/downloadIstio | sh - \
+    && cd "$(ls | grep istio)" \
+    && mv bin/istioctl /usr/local/bin
+
+# Install kubectl latest release
+RUN cd ~/Downloads \
+    && curl -LO https://storage.googleapis.com/kubernetes-release/release/`curl -s https://storage.googleapis.com/kubernetes-release/release/stable.txt  --insecure`/bin/linux/amd64/kubectl --insecure \
+    && chmod +x ./kubectl \
+    && sudo mv ./kubectl /usr/local/bin/kubectl
+
+RUN rm -rf ~/Downloads
+
+# Script copies localhost's ~/.kube/config file into the container and swaps out 
+# localhost for host.docker.internal on bash/zsh start to keep them in sync.
+COPY copy-kube-config.sh /usr/local/share/
+RUN chown ${USERNAME}:root /usr/local/share/copy-kube-config.sh \
+    && echo "source /usr/local/share/copy-kube-config.sh" | tee -a /root/.bashrc /root/.zshrc /home/${USERNAME}/.bashrc >> /home/${USERNAME}/.zshrc
