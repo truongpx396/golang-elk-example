@@ -36,7 +36,8 @@
     "forwardPorts": [
         8080,
         9300,
-        5701
+        5701,
+        20001
     ],
     // Use 'settings' to set *default* container specific settings.json values on container create.
     // You can edit these settings after create using File > Preferences > Settings > Remote.
