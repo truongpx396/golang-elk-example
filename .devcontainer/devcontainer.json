@@ -134,8 +134,10 @@
             ]
         }
     },
-    "postCreateCommand": "go version && go install github.com/google/wire/cmd/wire@latest && go install github.com/kyleconroy/sqlc/cmd/sqlc@latest && istioctl install --set profile=demo -y",
-    "postStartCommand": "export KUBECONFIG=/usr/local/share/kube-localhost/config && kubectl port-forward svc/istio-ingressgateway 8080:80 -n istio-system && kubectl port-forward svc/kiali 20001:20001 -n istio-system",
+    "postCreateCommand": "go version && go install github.com/google/wire/cmd/wire@latest && go install github.com/sqlc-dev/sqlc/cmd/sqlc@latest && istioctl install --set profile=demo -y",
+    // "postStartCommand": "export KUBECONFIG=/usr/local/share/kube-localhost/config && kubectl port-forward svc/istio-ingressgateway 8080:80 -n istio-system && kubectl port-forward svc/kiali 20001:20001 -n istio-system",
+    "postStartCommand": "./devcontainer/post-start-command.sh",
+    // "postAttachCommand": "export KUBECONFIG=/usr/local/share/kube-localhost/config && kubectl port-forward svc/istio-ingressgateway 8080:80 -n istio-system && kubectl port-forward svc/kiali 20001:20001 -n istio-system",
     "features": {
         "ghcr.io/devcontainers/features/go:1": {
             "version": "1.19.4"

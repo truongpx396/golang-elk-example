@@ -43,6 +43,12 @@ RUN cd ~/Downloads \
     && chmod +x ./kubectl \
     && sudo mv ./kubectl /usr/local/bin/kubectl
 
+# Install Helm 3.10.3
+RUN cd ~/Downloads \
+    && curl -LO https://get.helm.sh/helm-v3.10.3-linux-arm64.tar.gz \
+    && tar xfz helm-v3.10.3-linux-arm64.tar.gz \
+    && mv linux-arm64/helm /usr/local/bin/helm
+
 RUN rm -rf ~/Downloads
 
 # Script copies localhost's ~/.kube/config file into the container and swaps out 
