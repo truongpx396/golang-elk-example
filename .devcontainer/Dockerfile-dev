@@ -44,15 +44,17 @@ RUN cd ~/Downloads \
     && sudo mv ./kubectl /usr/local/bin/kubectl
 
 # Install Helm 3.10.3
-RUN cd ~/Downloads \
-    && curl -LO https://get.helm.sh/helm-v3.10.3-linux-arm64.tar.gz \
-    && tar xfz helm-v3.10.3-linux-arm64.tar.gz \
-    && mv linux-arm64/helm /usr/local/bin/helm
+# RUN cd ~/Downloads \
+#     && curl -LO https://get.helm.sh/helm-v3.10.3-linux-arm64.tar.gz \
+#     && tar xfz helm-v3.10.3-linux-arm64.tar.gz \
+#     && mv linux-arm64/helm /usr/local/bin/helm
 
 RUN rm -rf ~/Downloads
 
 # Script copies localhost's ~/.kube/config file into the container and swaps out 
 # localhost for host.docker.internal on bash/zsh start to keep them in sync.
-COPY copy-kube-config.sh /usr/local/share/
-RUN chown ${USERNAME}:root /usr/local/share/copy-kube-config.sh \
-    && echo "source /usr/local/share/copy-kube-config.sh" | tee -a /root/.bashrc /root/.zshrc /home/${USERNAME}/.bashrc >> /home/${USERNAME}/.zshrc
+# COPY copy-kube-config.sh /usr/local/share/
+# RUN chown ${USERNAME}:root /usr/local/share/copy-kube-config.sh \
+#     && echo "source /usr/local/share/copy-kube-config.sh" | tee -a /root/.bashrc /root/.zshrc /home/${USERNAME}/.bashrc >> /home/${USERNAME}/.zshrc
+
+# VOLUME [ "/var/lib/docker" ]
