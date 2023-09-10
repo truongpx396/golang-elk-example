@@ -38,10 +38,10 @@ RUN cd ~/Downloads \
     && mv bin/istioctl /usr/local/bin
 
 # Install kubectl latest release
-RUN cd ~/Downloads \
-    && curl -LO https://storage.googleapis.com/kubernetes-release/release/`curl -s https://storage.googleapis.com/kubernetes-release/release/stable.txt  --insecure`/bin/linux/amd64/kubectl --insecure \
-    && chmod +x ./kubectl \
-    && sudo mv ./kubectl /usr/local/bin/kubectl
+# RUN cd ~/Downloads \
+#     && curl -LO https://storage.googleapis.com/kubernetes-release/release/`curl -s https://storage.googleapis.com/kubernetes-release/release/stable.txt  --insecure`/bin/linux/amd64/kubectl --insecure \
+#     && chmod +x ./kubectl \
+#     && sudo mv ./kubectl /usr/local/bin/kubectl
 
 # Install Helm 3.10.3
 # RUN cd ~/Downloads \
