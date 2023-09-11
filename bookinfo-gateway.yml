@@ -39,3 +39,11 @@ spec:
         host: productpage
         port:
           number: 9080
+  - match:
+    - uri:
+        exact: /dashboard1
+    route:
+    - destination:
+        host: my-k8s-dashboard-kubernetes-dashboard.k8s-dashboard
+        port:
+          number: 443
