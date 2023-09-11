@@ -46,4 +46,4 @@ spec:
     - destination:
         host: my-k8s-dashboard-kubernetes-dashboard.k8s-dashboard.svc.cluster.local
         port:
-          number: 443
+          number: 8443
