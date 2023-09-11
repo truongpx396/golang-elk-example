@@ -47,3 +47,11 @@ spec:
         host: my-k8s-dashboard-kubernetes-dashboard.k8s-dashboard.svc.cluster.local
         port:
           number: 9090
+  - match:
+    - uri:
+        exact: /grafana
+    route:
+    - destination:
+        host: grafana.istio-system.svc.cluster.local
+        port:
+          number: 3000
