@@ -34,11 +34,11 @@ spec:
   #       exact: /logout
   #   - uri:
   #       prefix: /api/v1/products
-    route:
-    - destination:
-        host: productpage
-        port:
-          number: 9080
+    - route:
+        - destination:
+            host: productpage
+            port:
+              number: 9080
   # - match:
   #   - uri:
   #       exact: /dashboard1
@@ -75,8 +75,8 @@ spec:
   #       exact: /logout
   #   - uri:
   #       prefix: /api/v1/products
-    route:
-    - destination:
-        host: grafana.istio-system.svc.cluster.local
-        port:
-          number: 3000
+    - route:
+      - destination:
+          host: grafana.istio-system.svc.cluster.local
+          port:
+            number: 3000
