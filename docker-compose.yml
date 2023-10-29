@@ -6,7 +6,7 @@ services:
     container_name: mongodb
     environment:
       # - BITNAMI_DEBUG = true
-      - MONGODB_EXTRA_USERNAMES = root
+      - MONGODB_EXTRA_USERNAMES = user1
       - MONGODB_EXTRA_DATABASES = openIM_v3
       - MONGODB_EXTRA_PASSWORDS = openIM123
       - MONGODB_ROOT_USER = root
