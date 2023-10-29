@@ -6,12 +6,12 @@ services:
     container_name: mongodb
     environment:
       # - BITNAMI_DEBUG = true
-      - MONGODB_EXTRA_USERNAMES = user1
-      - MONGODB_EXTRA_DATABASES = openIM_v3
-      - MONGODB_EXTRA_PASSWORDS = openIM123
-      - MONGODB_ROOT_USER = root
-      - MONGODB_ROOT_PASSWORD = openIM123
-      - ALLOW_EMPTY_PASSWORD = 'no'
+      - MONGODB_EXTRA_USERNAMES=user1
+      - MONGODB_EXTRA_DATABASES=openIM_v3
+      - MONGODB_EXTRA_PASSWORDS=openIM123
+      - MONGODB_ROOT_USER=root
+      - MONGODB_ROOT_PASSWORD=openIM123
+      - ALLOW_EMPTY_PASSWORD=no
         # - name: MONGODB_SYSTEM_LOG_VERBOSITY
         #   value: '0'
         # - name: MONGODB_DISABLE_SYSTEM_LOG
