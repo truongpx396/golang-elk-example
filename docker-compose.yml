@@ -2,7 +2,7 @@ version: '3.6'
 
 services:
   mogodb:
-    image: docker.io/bitnami/mongodb:5.0.19-debian-11-r6
+    image: docker.io/bitnami/mongodb:5.0.16-debian-11-r2
     container_name: mongodb
     environment:
       # - BITNAMI_DEBUG = true
